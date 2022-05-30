@@ -1,0 +1,14 @@
+{
+    "name": "perfectwp/pwp-wco",
+    "authors": [
+        {
+            "name": "PerfectWP - WC Omnibus",
+            "email": "kontakt@perfectlyproject.pl"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "PerfectWPWCO\\": "src/"
+        }
+    }
+}

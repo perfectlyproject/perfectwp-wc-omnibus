@@ -1,0 +1,56 @@
+# Copyright (C) 2022 PerfectWP
+# This file is distributed under the same license as the PerfectWP - WC Omnibus plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: PerfectWP - WC Omnibus 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/perfectwp-wc-omnibus\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2022-05-30T12:44:23+00:00\n"
+"PO-Revision-Date: 2022-05-30T12:44:23+00:00\n"
+"X-Generator: WP-CLI 2.0.1\n"
+"X-Domain: pwp-wco\n"
+
+#. Plugin Name of the plugin
+msgid "PerfectWP - WC Omnibus"
+msgstr ""
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+msgid "https://perfectwp.pl/"
+msgstr ""
+
+#. Description of the plugin
+msgid "Compatibility with EU Omnibus Directive"
+msgstr ""
+
+#. Author of the plugin
+msgid "PerfectWP"
+msgstr ""
+
+#: templates/admin/omnibus-price-simple.php:18
+msgid "Omnibus - Price"
+msgstr ""
+
+#: templates/admin/omnibus-price-simple.php:20
+msgid "The lowest price in 30 days"
+msgstr ""
+
+#: templates/admin/omnibus-price-simple.php:28
+msgid "Omnibus - Date"
+msgstr ""
+
+#: templates/admin/omnibus-price-simple.php:30
+msgid "The date when lowest price in 30 days occurred."
+msgstr ""
+
+#: templates/front/omnibus-price.php:11
+msgid "The lowest price in 30 days: %s"
+msgstr ""
+
+#: src/Utils/Alert.php:14
+msgid "Hide."
+msgstr ""

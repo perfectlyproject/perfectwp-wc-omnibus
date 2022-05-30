@@ -1,0 +1,23 @@
+# Editors
+project.xml
+project.properties
+/nbproject/private/
+.buildpath
+.project
+.settings*
+.idea
+.vscode
+*.sublime-project
+*.sublime-workspace
+.sublimelinterrc
+*.swp
+
+# Webpack
+node_modules/
+public/
+
+# Composer
+vendor/
+
+# Plugin
+build/
