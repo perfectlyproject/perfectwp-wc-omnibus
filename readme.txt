@@ -9,7 +9,7 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-- Showing lowest price in the last 30 days,
+- Showing the lowest price in the last 30 days when product is on sale,
 - Tracking all price changes
 
 Works correctly with common product types:
