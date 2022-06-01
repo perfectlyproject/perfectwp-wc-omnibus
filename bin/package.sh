@@ -20,6 +20,7 @@ echo "Replace version in files."
 cd "$BUILD_PATH" || exit
 REPLACE_STRING_VERSION='{VERSION}'
 sed -i '' "s/$REPLACE_STRING_VERSION/$VERSION/g" "perfectwp-wc-omnibus/perfectwp-wc-omnibus.php"
+sed -i '' "s/$REPLACE_STRING_VERSION/$VERSION/g" "readme.txt"
 sed -i '' "s/$REPLACE_STRING_VERSION/$VERSION/g" "perfectwp-wc-omnibus/src/Plugin.php"
 
 echo "Generating zip file..."

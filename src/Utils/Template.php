@@ -2,6 +2,8 @@
 
 namespace PerfectWPWCO\Utils;
 
+if (!defined('ABSPATH')) exit;
+
 use PerfectWPWCO\Plugin;
 
 class Template

@@ -2,6 +2,8 @@
 
 namespace PerfectWPWCO\Extensions;
 
+if (!defined('ABSPATH')) exit;
+
 use PerfectWPWCO\Plugin;
 use PerfectWPWCO\Repositories\HistoryPriceRepository;
 use PerfectWPWCO\Utils\Template;

@@ -1,15 +1,14 @@
 <?php
 /**
  * Plugin Name: PerfectWP - WC Omnibus
- * Plugin URI: https://perfectwp.pl/
+ * Plugin URI: https://perfectlyproject.pl/
  * Description: Compatibility with EU Omnibus Directive
  * Author: PerfectWP
- * Author URI: https://perfectwp.pl/
  * Version: {VERSION}
  * Requires at least: 5.4
  * WC requires at least: 4.0
  * Requires PHP: 7.0
- * Text Domain: pwp-wco
+ * Text Domain: perfectwp-wc-omnibus
  * Domain Path: /languages
  *
  * Copyright 2022 PerfectWP

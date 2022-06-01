@@ -2,6 +2,8 @@
 
 namespace PerfectWPWCO;
 
+if (!defined('ABSPATH')) exit;
+
 abstract class Container
 {
     /**

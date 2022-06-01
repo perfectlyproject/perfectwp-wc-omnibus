@@ -2,6 +2,8 @@
 
 namespace PerfectWPWCO\Repositories;
 
+if (!defined('ABSPATH')) exit;
+
 use PerfectWPWCO\Models\HistoryPrice;
 
 class HistoryPriceRepository

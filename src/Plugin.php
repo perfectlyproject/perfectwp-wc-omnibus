@@ -26,7 +26,7 @@ final class Plugin extends Container
     /**
      * Plugin textdomain
      */
-    const TEXT_DOMAIN = 'pwp-wco';
+    const TEXT_DOMAIN = 'perfectwp-wc-omnibus';
 
     /**
      * Application constructor.

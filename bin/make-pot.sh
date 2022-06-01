@@ -1,7 +1,7 @@
 #!/bin/sh
 
 PLUGIN_SLUG="perfectwp-wc-omnibus"
-TEXT_DOMAIN="pwp-wco"
+TEXT_DOMAIN="perfectwp-wc-omnibus"
 PROJECT_PATH=$(pwd)
 LANGUAGES_PATH="$PROJECT_PATH/languages"
 DEFAULT_TEMPLATE_PATH="$LANGUAGES_PATH/$PLUGIN_SLUG.pot"

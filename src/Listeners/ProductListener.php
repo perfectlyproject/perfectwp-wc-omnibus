@@ -2,6 +2,8 @@
 
 namespace PerfectWPWCO\Listeners;
 
+if (!defined('ABSPATH')) exit;
+
 use PerfectWPWCO\Models\HistoryPrice;
 use PerfectWPWCO\Repositories\HistoryPriceRepository;
 use PerfectWPWCO\Utils\Arr;

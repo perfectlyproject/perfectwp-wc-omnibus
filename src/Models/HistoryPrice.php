@@ -2,9 +2,9 @@
 
 namespace PerfectWPWCO\Models;
 
-use PerfectWPWCO\Plugin;
-
 if (!defined('ABSPATH')) exit;
+
+use PerfectWPWCO\Plugin;
 
 class HistoryPrice extends AbstractModel
 {
