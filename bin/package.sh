@@ -17,11 +17,11 @@ echo "Syncing files..."
 rsync -rc --exclude-from="$PROJECT_PATH/.distignore" "$PROJECT_PATH/" "$DEST_PATH/" --delete --delete-excluded
 
 echo "Replace version in files."
-cd "$BUILD_PATH" || exit
+cd "$DEST_PATH" || exit
 REPLACE_STRING_VERSION='{VERSION}'
-sed -i '' "s/$REPLACE_STRING_VERSION/$VERSION/g" "perfectwp-wc-omnibus/perfectwp-wc-omnibus.php"
-sed -i '' "s/$REPLACE_STRING_VERSION/$VERSION/g" "readme.txt"
-sed -i '' "s/$REPLACE_STRING_VERSION/$VERSION/g" "perfectwp-wc-omnibus/src/Plugin.php"
+sed -i "s/$REPLACE_STRING_VERSION/$VERSION/g" "perfectwp-wc-omnibus.php"
+sed -i "s/$REPLACE_STRING_VERSION/$VERSION/g" "readme.txt"
+sed -i "s/$REPLACE_STRING_VERSION/$VERSION/g" "src/Plugin.php"
 
 echo "Generating zip file..."
 cd "$BUILD_PATH" || exit
