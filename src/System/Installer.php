@@ -28,6 +28,6 @@ class Installer
           PRIMARY KEY (`id`)
         )' . $wpdb->get_charset_collate());
 
-        update_option(Plugin::SLUG . '_db_version', System::getDBVersion());
+        update_option(Plugin::SLUG . '_db_version', System::getPluginVersion());
     }
 }

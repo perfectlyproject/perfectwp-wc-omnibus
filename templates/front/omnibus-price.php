@@ -1,6 +1,6 @@
 <?php
 
-/** @var $historyPrice \PerfectWPWCO\Models\HistoryPrice */
+/** @var $historyPrice \PerfectWPWCO\ViewModel\HistoryPriceViewModel */
 
 if (!defined('ABSPATH')) exit;
 

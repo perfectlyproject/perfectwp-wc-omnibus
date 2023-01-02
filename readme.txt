@@ -2,7 +2,7 @@
 Contributors: perfectwp
 Tags: woo, ecommerce, shop, omnibus, eu, law, woocommerce
 Requires at least: 5.4
-Tested up to: 6.0
+Tested up to: 6.1.1
 Stable tag: {VERSION}
 Requires PHP: 7.0
 License: GPLv2 or later
@@ -10,8 +10,14 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
+Compatibility with EU Omnibus Directive
+
 - Showing the lowest price in the last 30 days when product is on sale,
-- Tracking all price changes
+- Tracking all price changes,
+- Works correctly with taxable products
+
+Shortcode:
+- For developers who need to display information on custom place use ``[pwp_wco_omnibus_information]`` shortcode.
 
 Works correctly with common product types:
 - Simple products

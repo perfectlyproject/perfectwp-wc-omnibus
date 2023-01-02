@@ -6,6 +6,8 @@ if (!defined('ABSPATH')) exit;
 
 use PerfectWPWCO\Plugin;
 use PerfectWPWCO\System\Installer;
+use PerfectWPWCO\System\Migrations;
+use PerfectWPWCO\System\System;
 use PerfectWPWCO\System\Uninstaller;
 
 class SystemProvider
@@ -14,6 +16,7 @@ class SystemProvider
     {
         $this->registerInstaller();
         $this->registerUninstaller();
+        $this->registerMigrations();
     }
 
     public function registerInstaller()
@@ -25,5 +28,13 @@ class SystemProvider
     public function registerUninstaller()
     {
         register_uninstall_hook(Plugin::getInstance()->getPluginPath(), [Uninstaller::class, 'uninstall']);
+    }
+
+    public function registerMigrations()
+    {
+        add_action('upgrader_process_complete', function() {
+            $migrations = new Migrations();
+            $migrations->migrate(System::getDBVersion());
+        });
     }
 }
