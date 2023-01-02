@@ -38,7 +38,7 @@ Supported languages:
 
 == Changelog ==
 
-= 1.0.2 2023-01-02 =
+= 1.0.3 2023-01-02 =
 
 * Fix issue with taxable products
 * Add shortcode pwp_wco_omnibus_information
