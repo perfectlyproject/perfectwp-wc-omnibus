@@ -79,6 +79,6 @@ class Options
      */
     public static function isCalculateWithCurrentPrice()
     {
-        return self::getOption('calculate_with_current_price', 'no') === 'yes';
+        return self::getOption('is_calculate_with_current_price', 'no') === 'yes';
     }
 }

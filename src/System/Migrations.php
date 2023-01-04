@@ -48,6 +48,9 @@ class Migrations
 
         $wpdb->query('UPDATE '.HistoryPrice::getPrefixedTable().' SET end_date = start_date;');
 
+        Options::update('lowest_price_number_of_days', '30');
+        Options::update('is_calculate_with_current_price', 'no');
+
         update_option(Plugin::SLUG . '_db_version', '1.0.4');
     }
 }
