@@ -28,13 +28,15 @@ class ProductListener
             return;
         }
 
-        $this->maybeAddProductHistory($product->get_id(), $product->get_price());
-
         if ($product instanceof \WC_Product_Variable) {
             foreach (Arr::get($product->get_variation_prices(), 'price') as $id => $price) {
                 $this->maybeAddProductHistory($id, $price);
             }
+
+            return;
         }
+
+        $this->maybeAddProductHistory($product->get_id(), $product->get_price());
     }
 
     public function maybeAddProductHistory($productId, $productPrice)

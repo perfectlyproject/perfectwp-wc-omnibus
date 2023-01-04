@@ -7,6 +7,7 @@ if (!defined('ABSPATH')) exit;
 ?>
 <hr>
 <?php
+
 woocommerce_wp_text_input([
     'id' => '_last_price',
     'custom_attributes' => ['disabled' => 'disabled'],
@@ -20,8 +21,8 @@ woocommerce_wp_text_input([
 $range = '';
 
 if ($historyPrice) {
-    $from = $historyPrice->getStartDate()->format('Y-m-d H:i:s');
-    $to = $historyPrice->getEndDate()->format('Y-m-d H:i:s');
+    $from = wp_date('Y-m-d H:i:s', $historyPrice->getStartDate()->getTimestamp());
+    $to = $historyPrice->getEndDate() ? wp_date('Y-m-d H:i:s', $historyPrice->getEndDate()->getTimestamp()) : null;
     $range = implode(' - ', array_filter([$from, $to]));
 }
 

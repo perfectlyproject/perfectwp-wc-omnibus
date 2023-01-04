@@ -8,9 +8,9 @@ use PerfectWPWCO\Models\HistoryPrice;
 
 class HistoryPriceRepository
 {
-    public function findLowestHistoryPriceIn30Days($productId)
+    public function findLowestHistoryPriceInDays($productId, $fromDays = 30)
     {
-        $date = new \DateTime('-30days');
+        $date = new \DateTime('-' . intval($fromDays) . 'days');
 
         global $wpdb;
 

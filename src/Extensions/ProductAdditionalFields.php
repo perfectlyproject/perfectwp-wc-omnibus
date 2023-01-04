@@ -26,7 +26,7 @@ class ProductAdditionalFields
     public function simpleProductAdditionalFields()
     {
         $productId = intval($_GET['post']);
-        $historyPrice = $this->repositoryHistoryPrice->findLowestHistoryPriceIn30Days($productId);
+        $historyPrice = $this->repositoryHistoryPrice->findLowestHistoryPriceInDays($productId);
 
         (new Template())
             ->setPath(Plugin::getInstance()->basePath('templates/admin/omnibus-price-simple.php'))
@@ -38,7 +38,7 @@ class ProductAdditionalFields
     public function variationProductAdditionalFields($loop, $variationData, $variation)
     {
         $productId = $variation->ID;
-        $historyPrice = $this->repositoryHistoryPrice->findLowestHistoryPriceIn30Days($productId);
+        $historyPrice = $this->repositoryHistoryPrice->findLowestHistoryPriceInDays($productId);
 
         (new Template())
             ->setPath(Plugin::getInstance()->basePath('templates/admin/omnibus-price-simple.php'))

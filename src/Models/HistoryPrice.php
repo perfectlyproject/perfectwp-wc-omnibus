@@ -59,13 +59,21 @@ class HistoryPrice extends AbstractModel
         return floatval($this->price);
     }
 
+    /**
+     * @return \DateTime
+     * @throws \Exception
+     */
     public function getStartDate()
     {
         return new \DateTime($this->start_date);
     }
 
+    /**
+     * @return \DateTime|null
+     * @throws \Exception
+     */
     public function getEndDate()
     {
-        return new \DateTime($this->start_date);
+        return $this->end_date ? new \DateTime($this->end_date) : null;
     }
 }

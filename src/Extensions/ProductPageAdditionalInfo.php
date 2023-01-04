@@ -19,7 +19,7 @@ class ProductPageAdditionalInfo
 
     public function filterGetPriceHtml($price, $product)
     {
-        if (!$product->is_on_sale() || is_admin()) {
+        if (!$product->is_on_sale() || is_admin() || $product instanceof \WC_Product_Variable) {
             return $price;
         }
 
@@ -52,7 +52,7 @@ class ProductPageAdditionalInfo
     public static function getOmnibusInformation($product)
     {
         $historyPriceRepository = new HistoryPriceRepository();
-        $historyPrice = $historyPriceRepository->findLowestHistoryPriceIn30Days($product->get_id());
+        $historyPrice = $historyPriceRepository->findLowestHistoryPriceInDays($product->get_id());
 
         if (!$historyPrice) {
             return '';
