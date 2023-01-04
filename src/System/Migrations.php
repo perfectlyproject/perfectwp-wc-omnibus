@@ -2,6 +2,7 @@
 
 namespace PerfectWPWCO\System;
 
+use PerfectWPWCO\Models\HistoryPrice;
 use PerfectWPWCO\Models\Options;
 use PerfectWPWCO\Plugin;
 
@@ -12,17 +13,14 @@ class Migrations
         $reflectionClass = new \ReflectionClass($this);
 
         if (!$currentVersion) {
-            $currentVersion = 0;
+            $currentVersion = '1.0.0';
         }
-
-        $currentVersion = (int) str_replace('.', '', $currentVersion);
 
         foreach ($reflectionClass->getMethods() as $method) {
             if (strpos($method->getName(), 'update') === 0) {
-                $updateVersion = (int) str_replace('_', '', str_replace('update', '', $method->getName()));
+                $updateVersion = str_replace('_', '.', str_replace('update', '', $method->getName()));
 
-                if ($updateVersion > $currentVersion) {
-                    var_dump($method->getName());
+                if (version_compare($currentVersion, $updateVersion, '<')) {
                     call_user_func([$this, $method->getName()]);
                 }
             }
@@ -37,5 +35,19 @@ class Migrations
         Options::update('is_show_on_tax_page', 'no');
 
         update_option(Plugin::SLUG . '_db_version', '1.0.2');
+    }
+
+    public function update1_0_4()
+    {
+        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+
+        global $wpdb;
+
+        $wpdb->query('ALTER TABLE '.HistoryPrice::getPrefixedTable().' CHANGE `date` `start_date` datetime NOT NULL');
+        $wpdb->query('ALTER TABLE '.HistoryPrice::getPrefixedTable().' ADD `end_date` datetime NULL DEFAULT NULL');
+
+        $wpdb->query('UPDATE '.HistoryPrice::getPrefixedTable().' SET end_date = start_date;');
+
+        update_option(Plugin::SLUG . '_db_version', '1.0.4');
     }
 }

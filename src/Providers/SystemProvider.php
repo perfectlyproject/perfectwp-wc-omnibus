@@ -32,6 +32,13 @@ class SystemProvider
 
     public function registerMigrations()
     {
+        add_action('init', function() {
+            if (is_admin()) {
+                $migrations = new Migrations();
+                $migrations->migrate(System::getDBVersion());
+            }
+        });
+
         add_action('upgrader_process_complete', function() {
             $migrations = new Migrations();
             $migrations->migrate(System::getDBVersion());

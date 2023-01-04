@@ -13,7 +13,8 @@ class HistoryPrice extends AbstractModel
         return [
             'id' => '%d',
             'product_id' => '%d',
-            'date' => '%s',
+            'start_date' => '%s',
+            'end_date' => '%s',
             'price' => '%s',
         ];
     }
@@ -33,9 +34,14 @@ class HistoryPrice extends AbstractModel
         $this->product_id = $productId !== null ? intval($productId) : null;
     }
 
-    public function setDate(\DateTime $date)
+    public function setStartDate(\DateTime $date)
     {
-        $this->date = $date->format('Y-m-d H:i:s');
+        $this->start_date = $date->format('Y-m-d H:i:s');
+    }
+
+    public function setEndDate(\DateTime $date)
+    {
+        $this->end_date = $date->format('Y-m-d H:i:s');
     }
 
     public function setPrice($price)
@@ -53,8 +59,13 @@ class HistoryPrice extends AbstractModel
         return floatval($this->price);
     }
 
-    public function getDate()
+    public function getStartDate()
     {
-        return new \DateTime($this->date);
+        return new \DateTime($this->start_date);
+    }
+
+    public function getEndDate()
+    {
+        return new \DateTime($this->start_date);
     }
 }

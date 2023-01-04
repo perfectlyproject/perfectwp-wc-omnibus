@@ -40,6 +40,11 @@ class ProductListener
     public function maybeAddProductHistory($productId, $productPrice)
     {
         $newPrice = floatval($productPrice);
+
+        if (empty($newPrice)) {
+            return;
+        }
+
         $lastHistoryPrice = $this->historyProductRepository->findLastHistoryPrice($productId);
         $lastPrice = $lastHistoryPrice !== null ? $lastHistoryPrice->getPrice() : null;
 
@@ -47,11 +52,16 @@ class ProductListener
             return;
         }
 
-        $historyPrice = new HistoryPrice();
-        $historyPrice->setProductId($productId);
-        $historyPrice->setPrice($newPrice);
-        $historyPrice->setDate(new \DateTime('now'));
+        $nextHistoryPrice = new HistoryPrice();
+        $nextHistoryPrice->setProductId($productId);
+        $nextHistoryPrice->setPrice($newPrice);
+        $nextHistoryPrice->setStartDate(new \DateTime('now'));
 
-        $historyPrice->save();
+        $nextHistoryPrice->save();
+
+        if ($lastHistoryPrice !== null) {
+            $lastHistoryPrice->setEndDate(new \DateTime('now'));
+            $lastHistoryPrice->save();
+        }
     }
 }
