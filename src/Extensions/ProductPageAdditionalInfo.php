@@ -52,7 +52,7 @@ class ProductPageAdditionalInfo
     public static function getOmnibusInformation($product)
     {
         $historyPriceRepository = new HistoryPriceRepository();
-        $historyPrice = $historyPriceRepository->findLowestHistoryPriceInDays($product->get_id());
+        $historyPrice = $historyPriceRepository->findLowestHistoryPriceInDaysFromOptions($product->get_id());
 
         if (!$historyPrice) {
             return '';

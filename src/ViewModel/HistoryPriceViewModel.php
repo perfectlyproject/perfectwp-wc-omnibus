@@ -8,7 +8,8 @@ class HistoryPriceViewModel
 {
     private $product;
 
-    private HistoryPrice $historyPrice;
+    /** @var HistoryPrice */
+    private $historyPrice;
 
     public function __construct($product, HistoryPrice $historyPrice)
     {

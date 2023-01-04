@@ -5,12 +5,33 @@ namespace PerfectWPWCO\Repositories;
 if (!defined('ABSPATH')) exit;
 
 use PerfectWPWCO\Models\HistoryPrice;
+use PerfectWPWCO\Models\Options;
 
 class HistoryPriceRepository
 {
-    public function findLowestHistoryPriceInDays($productId, $fromDays = 30)
+    /**
+     * @param int $productId
+     * @return HistoryPrice|null
+     * @throws \Exception
+     */
+    public function findLowestHistoryPriceInDaysFromOptions(int $productId)
     {
-        $date = new \DateTime('-' . intval($fromDays) . 'days');
+        return $this->findLowestHistoryPriceInDays($productId, Options::getLowestPriceNumberOfDays());
+    }
+
+    /**
+     * @param int $productId
+     * @param int $fromDays
+     * @return HistoryPrice|null
+     * @throws \Exception
+     */
+    public function findLowestHistoryPriceInDays(int $productId, int $fromDays = 30)
+    {
+        if ($fromDays <= 0) {
+            throw new \InvalidArgumentException('From days has to be greater than 0');
+        }
+
+        $date = new \DateTime('-' . $fromDays . 'days');
 
         global $wpdb;
 
@@ -23,7 +44,11 @@ class HistoryPriceRepository
         return HistoryPrice::buildModel($params);
     }
 
-    public function findLastHistoryPrice($productId)
+    /**
+     * @param int $productId
+     * @return HistoryPrice|null
+     */
+    public function findLastHistoryPrice(int $productId)
     {
         global $wpdb;
 

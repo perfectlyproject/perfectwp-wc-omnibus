@@ -65,4 +65,12 @@ class Options
     {
         return self::getOption('is_show_on_tax_page', 'no') === 'yes';
     }
+
+    /**
+     * @return int
+     */
+    public static function getLowestPriceNumberOfDays()
+    {
+        return max(1, (int) self::getOption('lowest_price_number_of_days', 30));
+    }
 }

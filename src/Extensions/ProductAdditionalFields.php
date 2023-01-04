@@ -4,6 +4,7 @@ namespace PerfectWPWCO\Extensions;
 
 if (!defined('ABSPATH')) exit;
 
+use PerfectWPWCO\Models\Options;
 use PerfectWPWCO\Plugin;
 use PerfectWPWCO\Repositories\HistoryPriceRepository;
 use PerfectWPWCO\Utils\Template;
@@ -26,7 +27,7 @@ class ProductAdditionalFields
     public function simpleProductAdditionalFields()
     {
         $productId = intval($_GET['post']);
-        $historyPrice = $this->repositoryHistoryPrice->findLowestHistoryPriceInDays($productId);
+        $historyPrice = $this->repositoryHistoryPrice->findLowestHistoryPriceInDaysFromOptions($productId);
 
         (new Template())
             ->setPath(Plugin::getInstance()->basePath('templates/admin/omnibus-price-simple.php'))
@@ -38,7 +39,7 @@ class ProductAdditionalFields
     public function variationProductAdditionalFields($loop, $variationData, $variation)
     {
         $productId = $variation->ID;
-        $historyPrice = $this->repositoryHistoryPrice->findLowestHistoryPriceInDays($productId);
+        $historyPrice = $this->repositoryHistoryPrice->findLowestHistoryPriceInDaysFromOptions($productId);
 
         (new Template())
             ->setPath(Plugin::getInstance()->basePath('templates/admin/omnibus-price-simple.php'))

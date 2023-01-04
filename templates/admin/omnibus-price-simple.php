@@ -2,6 +2,8 @@
 
 /** @var $historyPrice \PerfectWPWCO\Models\HistoryPrice|null */
 
+use PerfectWPWCO\Models\Options;
+
 if (!defined('ABSPATH')) exit;
 
 ?>
@@ -15,7 +17,7 @@ woocommerce_wp_text_input([
     'data_type' => 'price',
     'label' => __('Omnibus - Price', 'perfectwp-wc-omnibus').' ('.get_woocommerce_currency_symbol().')',
     'desc_tip' => true,
-    'description' => __('The lowest price in 30 days', 'perfectwp-wc-omnibus'),
+    'description' => sprintf(__('The lowest price in %d days', 'perfectwp-wc-omnibus'), Options::getLowestPriceNumberOfDays()),
 ]);
 
 $range = '';
@@ -33,6 +35,6 @@ woocommerce_wp_text_input([
     'data_type' => 'text',
     'label' => __('Omnibus - Date', 'perfectwp-wc-omnibus'),
     'desc_tip' => true,
-    'description' => __('The date range when lowest price in 30 days occurred.', 'perfectwp-wc-omnibus'),
+    'description' => sprintf(__('The date range when lowest price in %d days occurred.', 'perfectwp-wc-omnibus'), Options::getLowestPriceNumberOfDays()),
 ]);
 ?>

@@ -34,7 +34,7 @@ class AdminOptions
                 'id' => self::SECTION_ID
             ],
             [
-                'title' => __('Show on:', 'perfectwp-wc-omnibus'),
+                'title' => __('Show on', 'perfectwp-wc-omnibus'),
                 'desc' => __('Single product page', 'perfectwp-wc-omnibus'),
                 'id' => Options::getOptionKey('is_show_on_product_page'),
                 'type' => 'checkbox',
@@ -63,8 +63,15 @@ class AdminOptions
                 'checkboxgroup' => 'end',
             ],
             [
+                'title' => __('Number of days', 'perfectwp-wc-omnibus'),
+                'id' => Options::getOptionKey('lowest_price_number_of_days'),
+                'type' => 'number',
+                'default' => 30,
+                'custom_attributes' => ['required' => 'required', 'min' => 1]
+            ],
+            [
                 'type' => 'sectionend'
-            ]
+            ],
         ];
     }
 }
