@@ -73,4 +73,12 @@ class Options
     {
         return max(1, (int) self::getOption('lowest_price_number_of_days', 30));
     }
+
+    /**
+     * @return bool
+     */
+    public static function isCalculateWithCurrentPrice()
+    {
+        return self::getOption('calculate_with_current_price', 'no') === 'yes';
+    }
 }

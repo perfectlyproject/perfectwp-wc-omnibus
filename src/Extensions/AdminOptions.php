@@ -70,6 +70,13 @@ class AdminOptions
                 'custom_attributes' => ['required' => 'required', 'min' => 1]
             ],
             [
+                'title' => __('Calculate with current price', 'perfectwp-wc-omnibus'),
+                'desc' => __('Yes (Recommended to disable this option)', 'perfectwp-wc-omnibus'),
+                'id' => Options::getOptionKey('calculate_with_current_price'),
+                'type' => 'checkbox',
+                'default' => 'no',
+            ],
+            [
                 'type' => 'sectionend'
             ],
         ];
