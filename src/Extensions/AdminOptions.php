@@ -36,7 +36,7 @@ class AdminOptions
                 'id' => self::SECTION_ID
             ],
             [
-                'title' => __('Show on', 'perfectwp-wc-omnibus'),
+                'title' => __('Show on:', 'perfectwp-wc-omnibus'),
                 'desc' => __('Single product page', 'perfectwp-wc-omnibus'),
                 'id' => Options::getOptionKey('is_show_on_product_page'),
                 'type' => 'checkbox',
@@ -65,35 +65,35 @@ class AdminOptions
                 'checkboxgroup' => 'end',
             ],
             [
-                'title' => __('Number of days', 'perfectwp-wc-omnibus'),
+                'title' => __('Number of days:', 'perfectwp-wc-omnibus'),
                 'id' => Options::getOptionKey('lowest_price_number_of_days'),
                 'type' => 'number',
                 'default' => 30,
                 'custom_attributes' => ['required' => 'required', 'min' => 1]
             ],
             [
-                'title' => __('Omnibus message', 'perfectwp-wc-omnibus'),
+                'title' => __('Message:', 'perfectwp-wc-omnibus'),
                 'id' => Options::getTranslatedOptionKey('message_lowest_price', Language::getCode()),
                 'type' => 'text',
                 'default' => __('Lowest price [days] days before the discount: [price]', 'perfectwp-wc-omnibus'),
                 'custom_attributes' => ['required' => 'required']
             ],
             [
-                'title' => __('Show only for sale', 'perfectwp-wc-omnibus'),
+                'title' => __('Show only for sale:', 'perfectwp-wc-omnibus'),
                 'desc' => __('Yes (Recommended to enable this option)', 'perfectwp-wc-omnibus'),
                 'id' => Options::getOptionKey('is_show_only_for_sale'),
                 'type' => 'checkbox',
                 'default' => 'yes',
             ],
             [
-                'title' => __('Calculate include current price', 'perfectwp-wc-omnibus'),
+                'title' => __('Calculate include current price:', 'perfectwp-wc-omnibus'),
                 'desc' => __('Yes (Recommended to disable this option)', 'perfectwp-wc-omnibus'),
                 'id' => Options::getOptionKey('is_calculate_include_current_price'),
                 'type' => 'checkbox',
                 'default' => 'no',
             ],
             [
-                'title' => __('Calculate lowest price from', 'perfectwp-wc-omnibus'),
+                'title' => __('Calculate lowest price from:', 'perfectwp-wc-omnibus'),
                 'id' => Options::getOptionKey('calculate_lowest_price_from'),
                 'type' => 'select',
                 'options' => [
