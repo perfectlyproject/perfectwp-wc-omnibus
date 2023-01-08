@@ -1,6 +1,6 @@
 === PerfectWP - WC Omnibus ===
 Contributors: perfectwp
-Tags: woo, ecommerce, shop, omnibus, eu, law, woocommerce
+Tags: woo, ecommerce, shop, omnibus, eu, law, woocommerce, history, price, e-commerce, product
 Requires at least: 5.4
 Tested up to: 6.1.1
 Stable tag: {VERSION}
@@ -10,9 +10,9 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-Compatibility with EU Omnibus Directive
+The First Plugin for [WooCommerce](https://wordpress.org/plugins/woocommerce/) with correct implemented EU Directive Omnibus [2019/2161 of the European Parliament](https://eur-lex.europa.eu/eli/dir/2019/2161/oj)
 
-- Showing the lowest price in the last 30 days when product is on sale,
+- Showing the lowest price in the last 30 days before a product has been marked as on sale,
 - Tracking all price changes,
 - Works correctly with taxable products
 
