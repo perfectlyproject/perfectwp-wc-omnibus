@@ -34,12 +34,12 @@ class HistoryPrice extends AbstractModel
         $this->product_id = $productId !== null ? intval($productId) : null;
     }
 
-    public function setStartDate(\DateTime $date)
+    public function setStartDate(\DateTimeImmutable $date)
     {
         $this->start_date = $date->format('Y-m-d H:i:s');
     }
 
-    public function setEndDate(\DateTime $date)
+    public function setEndDate(\DateTimeImmutable $date)
     {
         $this->end_date = $date->format('Y-m-d H:i:s');
     }
@@ -60,20 +60,20 @@ class HistoryPrice extends AbstractModel
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTimeImmutable
      * @throws \Exception
      */
     public function getStartDate()
     {
-        return new \DateTime($this->start_date);
+        return new \DateTimeImmutable($this->start_date);
     }
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeImmutable|null
      * @throws \Exception
      */
     public function getEndDate()
     {
-        return $this->end_date ? new \DateTime($this->end_date) : null;
+        return $this->end_date ? new \DateTimeImmutable($this->end_date) : null;
     }
 }

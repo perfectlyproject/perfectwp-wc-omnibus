@@ -18,7 +18,7 @@ class ListenerProvider
         foreach ([
             ProductListener::class
                  ] as $class) {
-            (new $class())->hooks();
+            (new $class())->register();
         }
     }
 }

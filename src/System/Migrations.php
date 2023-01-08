@@ -39,8 +39,6 @@ class Migrations
 
     public function update1_0_4()
     {
-        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-
         global $wpdb;
 
         $wpdb->query('ALTER TABLE '.HistoryPrice::getPrefixedTable().' CHANGE `date` `start_date` datetime NOT NULL');
@@ -49,7 +47,8 @@ class Migrations
         $wpdb->query('UPDATE '.HistoryPrice::getPrefixedTable().' SET end_date = start_date;');
 
         Options::update('lowest_price_number_of_days', '30');
-        Options::update('is_calculate_with_current_price', 'no');
+        Options::update('is_calculate_include_current_price', 'no');
+        Options::update('is_show_only_for_sale', 'yes');
 
         update_option(Plugin::SLUG . '_db_version', '1.0.4');
     }

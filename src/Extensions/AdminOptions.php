@@ -3,6 +3,7 @@
 namespace PerfectWPWCO\Extensions;
 
 use PerfectWPWCO\Models\Options;
+use PerfectWPWCO\Repositories\HistoryPriceRepository;
 
 class AdminOptions
 {
@@ -70,11 +71,28 @@ class AdminOptions
                 'custom_attributes' => ['required' => 'required', 'min' => 1]
             ],
             [
-                'title' => __('Calculate with current price', 'perfectwp-wc-omnibus'),
+                'title' => __('Show only for sale', 'perfectwp-wc-omnibus'),
+                'desc' => __('Yes (Recommended to enable this option)', 'perfectwp-wc-omnibus'),
+                'id' => Options::getOptionKey('is_show_only_for_sale'),
+                'type' => 'checkbox',
+                'default' => 'yes',
+            ],
+            [
+                'title' => __('Calculate include current price', 'perfectwp-wc-omnibus'),
                 'desc' => __('Yes (Recommended to disable this option)', 'perfectwp-wc-omnibus'),
-                'id' => Options::getOptionKey('is_calculate_with_current_price'),
+                'id' => Options::getOptionKey('is_calculate_include_current_price'),
                 'type' => 'checkbox',
                 'default' => 'no',
+            ],
+            [
+                'title' => __('Calculate lowest price from', 'perfectwp-wc-omnibus'),
+                'id' => Options::getOptionKey('calculate_lowest_price_from'),
+                'type' => 'select',
+                'options' => [
+                    HistoryPriceRepository::FROM_LAST_CHANGED_PRICE_DATE => __('From last changed price date - Recommended', 'perfectwp-wc-omnibus'),
+                    HistoryPriceRepository::FROM_NOW_DATE => __('From current date', 'perfectwp-wc-omnibus'),
+                ],
+                'default' => HistoryPriceRepository::FROM_LAST_CHANGED_PRICE_DATE,
             ],
             [
                 'type' => 'sectionend'

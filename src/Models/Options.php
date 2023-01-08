@@ -3,6 +3,7 @@
 namespace PerfectWPWCO\Models;
 
 use PerfectWPWCO\Plugin;
+use PerfectWPWCO\Repositories\HistoryPriceRepository;
 
 class Options
 {
@@ -37,7 +38,7 @@ class Options
     /**
      * @return bool
      */
-    public static function isShowOnProductPage()
+    public static function isShowOnProductPage(): bool
     {
         return self::getOption('is_show_on_product_page', 'yes') === 'yes';
     }
@@ -45,7 +46,7 @@ class Options
     /**
      * @return bool
      */
-    public static function isShowOnArchivePage()
+    public static function isShowOnArchivePage(): bool
     {
         return self::getOption('is_show_on_archive_page', 'no') === 'yes';
     }
@@ -53,7 +54,7 @@ class Options
     /**
      * @return bool
      */
-    public static function isShowOnFrontPage()
+    public static function isShowOnFrontPage(): bool
     {
         return self::getOption('is_show_on_front_page', 'no') === 'yes';
     }
@@ -61,7 +62,7 @@ class Options
     /**
      * @return bool
      */
-    public static function isShowOnTaxonomyPage()
+    public static function isShowOnTaxonomyPage(): bool
     {
         return self::getOption('is_show_on_tax_page', 'no') === 'yes';
     }
@@ -69,7 +70,7 @@ class Options
     /**
      * @return int
      */
-    public static function getLowestPriceNumberOfDays()
+    public static function getLowestPriceNumberOfDays(): int
     {
         return max(1, (int) self::getOption('lowest_price_number_of_days', 30));
     }
@@ -77,8 +78,24 @@ class Options
     /**
      * @return bool
      */
-    public static function isCalculateWithCurrentPrice()
+    public static function isCalculateIncludeCurrentPrice(): bool
     {
-        return self::getOption('is_calculate_with_current_price', 'no') === 'yes';
+        return self::getOption('is_calculate_include_current_price', 'no') === 'yes';
+    }
+
+    /**
+     * @return string
+     */
+    public static function getCalculateLowestPriceFrom(): string
+    {
+        return self::getOption('calculate_lowest_price_from', HistoryPriceRepository::FROM_LAST_CHANGED_PRICE_DATE);
+    }
+
+    /**
+     * @return bool
+     */
+    public static function isShowOnlyForSale(): bool
+    {
+        return self::getOption('is_show_only_for_sale', 'yes') === 'yes';
     }
 }

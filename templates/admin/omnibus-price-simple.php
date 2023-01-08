@@ -8,6 +8,14 @@ if (!defined('ABSPATH')) exit;
 
 ?>
 <hr>
+<?php if (!$hasHistoryPrice): ?>
+<div class="form-field" style="margin: 0 15px;">
+    <div class="inline notice notice-warning" style="padding: 10px 15px">
+        <?php _e('The below lowest price has not been found in the history table, price is generated automatically and can not be sure.', 'perfectwp-wc-omnibus'); ?>
+    </div>
+</div>
+<?php endif; ?>
+
 <?php
 
 woocommerce_wp_text_input([

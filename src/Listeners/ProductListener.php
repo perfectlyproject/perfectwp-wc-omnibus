@@ -17,9 +17,14 @@ class ProductListener
         $this->historyProductRepository = new HistoryPriceRepository();
     }
 
-    public function hooks()
+    public function register()
     {
         add_action( 'woocommerce_after_product_object_save', [$this, 'onSaveProduct'], 10, 1 );
+    }
+
+    public function unregister()
+    {
+        remove_action( 'woocommerce_after_product_object_save', [$this, 'onSaveProduct'], 10, 1 );
     }
 
     public function onSaveProduct(\WC_Product $product)
@@ -57,12 +62,12 @@ class ProductListener
         $nextHistoryPrice = new HistoryPrice();
         $nextHistoryPrice->setProductId($productId);
         $nextHistoryPrice->setPrice($newPrice);
-        $nextHistoryPrice->setStartDate(new \DateTime('now'));
+        $nextHistoryPrice->setStartDate(new \DateTimeImmutable('now'));
 
         $nextHistoryPrice->save();
 
         if ($lastHistoryPrice !== null) {
-            $lastHistoryPrice->setEndDate(new \DateTime('now'));
+            $lastHistoryPrice->setEndDate(new \DateTimeImmutable('now'));
             $lastHistoryPrice->save();
         }
     }

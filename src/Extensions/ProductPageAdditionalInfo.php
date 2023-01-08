@@ -4,6 +4,7 @@ namespace PerfectWPWCO\Extensions;
 
 if (!defined('ABSPATH')) exit;
 
+use PerfectWPWCO\LowestPriceCalculator;
 use PerfectWPWCO\Models\Options;
 use PerfectWPWCO\Plugin;
 use PerfectWPWCO\Repositories\HistoryPriceRepository;
@@ -19,25 +20,25 @@ class ProductPageAdditionalInfo
 
     public function filterGetPriceHtml($price, $product)
     {
-        if (!$product->is_on_sale() || is_admin() || $product instanceof \WC_Product_Variable) {
+        if (is_admin() || $product instanceof \WC_Product_Variable || (!$product->is_on_sale() && Options::isShowOnlyForSale())) {
             return $price;
         }
 
-        if (Options::isShowOnProductPage()
-            && is_single()
-            && (get_queried_object_id() === $product->get_id() || get_queried_object_id() === $product->get_parent_id())) {
+        if (is_single()
+            && (get_queried_object_id() === $product->get_id() || get_queried_object_id() === $product->get_parent_id())
+            && Options::isShowOnProductPage()) {
             return $this->renderPrice($price, $this->getOmnibusInformation($product));
         }
 
-        if (Options::isShowOnArchivePage() && is_archive() && !is_tax()) {
+        if (is_archive() && !is_tax() && Options::isShowOnArchivePage()) {
             return $this->renderPrice($price, $this->getOmnibusInformation($product));
         }
 
-        if (Options::isShowOnTaxonomyPage() && is_tax()) {
+        if (is_tax() && Options::isShowOnTaxonomyPage()) {
             return $this->renderPrice($price, $this->getOmnibusInformation($product));
         }
 
-        if (Options::isShowOnFrontPage() && is_front_page()) {
+        if (is_front_page() && Options::isShowOnFrontPage()) {
             return $this->renderPrice($price, $this->getOmnibusInformation($product));
         }
 
@@ -51,8 +52,8 @@ class ProductPageAdditionalInfo
 
     public static function getOmnibusInformation($product)
     {
-        $historyPriceRepository = new HistoryPriceRepository();
-        $historyPrice = $historyPriceRepository->findLowestHistoryPriceInDaysFromOptions($product->get_id());
+        $lowestPriceCalculator = new LowestPriceCalculator();
+        $historyPrice = $lowestPriceCalculator->getLowestPrice($product);
 
         if (!$historyPrice) {
             return '';

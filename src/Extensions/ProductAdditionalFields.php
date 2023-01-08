@@ -4,18 +4,17 @@ namespace PerfectWPWCO\Extensions;
 
 if (!defined('ABSPATH')) exit;
 
-use PerfectWPWCO\Models\Options;
+use PerfectWPWCO\LowestPriceCalculator;
 use PerfectWPWCO\Plugin;
-use PerfectWPWCO\Repositories\HistoryPriceRepository;
 use PerfectWPWCO\Utils\Template;
 
 class ProductAdditionalFields
 {
-    private $repositoryHistoryPrice;
+    private $lowestPriceCalculator;
 
     public function __construct()
     {
-        $this->repositoryHistoryPrice = new HistoryPriceRepository();
+        $this->lowestPriceCalculator = new LowestPriceCalculator();
     }
 
     public function boot()
@@ -27,24 +26,24 @@ class ProductAdditionalFields
     public function simpleProductAdditionalFields()
     {
         $productId = intval($_GET['post']);
-        $historyPrice = $this->repositoryHistoryPrice->findLowestHistoryPriceInDaysFromOptions($productId);
 
         (new Template())
             ->setPath(Plugin::getInstance()->basePath('templates/admin/omnibus-price-simple.php'))
             ->setParams([
-            'historyPrice' => $historyPrice
+                'historyPrice' => $this->lowestPriceCalculator->getLowestPrice(wc_get_product($productId)),
+                'hasHistoryPrice' => $this->lowestPriceCalculator->hasHistoryPrice($productId)
         ])->display();
     }
 
     public function variationProductAdditionalFields($loop, $variationData, $variation)
     {
         $productId = $variation->ID;
-        $historyPrice = $this->repositoryHistoryPrice->findLowestHistoryPriceInDaysFromOptions($productId);
 
         (new Template())
             ->setPath(Plugin::getInstance()->basePath('templates/admin/omnibus-price-simple.php'))
             ->setParams([
-                'historyPrice' => $historyPrice
+                'historyPrice' => $this->lowestPriceCalculator->getLowestPrice(wc_get_product($productId)),
+                'hasHistoryPrice' => $this->lowestPriceCalculator->hasHistoryPrice($productId)
             ])->display();
     }
 }
