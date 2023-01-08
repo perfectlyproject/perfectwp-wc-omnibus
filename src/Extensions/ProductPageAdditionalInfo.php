@@ -9,7 +9,7 @@ use PerfectWPWCO\Models\Options;
 use PerfectWPWCO\Plugin;
 use PerfectWPWCO\Repositories\HistoryPriceRepository;
 use PerfectWPWCO\Utils\Template;
-use PerfectWPWCO\ViewModel\HistoryPriceViewModel;
+use PerfectWPWCO\ViewModel\FrontHistoryPriceViewModel;
 
 class ProductPageAdditionalInfo
 {
@@ -62,7 +62,7 @@ class ProductPageAdditionalInfo
         return (new Template())
             ->setPath(Plugin::getInstance()->basePath('templates/front/omnibus-price.php'))
             ->setParams([
-                'historyPrice' => new HistoryPriceViewModel($product, $historyPrice)
+                'historyPrice' => new FrontHistoryPriceViewModel($product, $historyPrice)
             ])->render();
     }
 }

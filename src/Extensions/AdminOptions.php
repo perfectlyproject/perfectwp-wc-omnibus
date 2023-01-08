@@ -4,6 +4,7 @@ namespace PerfectWPWCO\Extensions;
 
 use PerfectWPWCO\Models\Options;
 use PerfectWPWCO\Repositories\HistoryPriceRepository;
+use PerfectWPWCO\Support\Language;
 
 class AdminOptions
 {
@@ -69,6 +70,13 @@ class AdminOptions
                 'type' => 'number',
                 'default' => 30,
                 'custom_attributes' => ['required' => 'required', 'min' => 1]
+            ],
+            [
+                'title' => __('Omnibus message', 'perfectwp-wc-omnibus'),
+                'id' => Options::getTranslatedOptionKey('message_lowest_price', Language::getCode()),
+                'type' => 'text',
+                'default' => __('Lowest price [days] days before the discount: [price]', 'perfectwp-wc-omnibus'),
+                'custom_attributes' => ['required' => 'required']
             ],
             [
                 'title' => __('Show only for sale', 'perfectwp-wc-omnibus'),

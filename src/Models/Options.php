@@ -4,6 +4,7 @@ namespace PerfectWPWCO\Models;
 
 use PerfectWPWCO\Plugin;
 use PerfectWPWCO\Repositories\HistoryPriceRepository;
+use PerfectWPWCO\Support\Language;
 
 class Options
 {
@@ -25,9 +26,29 @@ class Options
         return $option;
     }
 
-    public static function getOptionKey($key)
+    private static function getTranslatedOption($key, $default = null, $lang = null)
     {
-        return Plugin::SLUG . '_' . $key;
+        $option = get_option(self::getTranslatedOptionKey($key, $lang));
+
+        if ($option === false) {
+            return $default;
+        }
+
+        return $option;
+    }
+
+    public static function getOptionKey(string $key, $lang = null)
+    {
+        return Plugin::SLUG . '_' . implode('_', array_filter([$key, $lang]));
+    }
+
+    public static function getTranslatedOptionKey(string $key, $lang = null)
+    {
+        if (!$lang) {
+            $lang = Language::getCode();
+        }
+
+        return self::getOptionKey($key, $lang);
     }
 
     public static function update($key, $value)
@@ -97,5 +118,13 @@ class Options
     public static function isShowOnlyForSale(): bool
     {
         return self::getOption('is_show_only_for_sale', 'yes') === 'yes';
+    }
+
+    /**
+     * @return string
+     */
+    public static function getMessageLowestPrice(): string
+    {
+        return self::getTranslatedOption('message_lowest_price', __('Lowest price [days] days before the discount: [price]', 'perfectwp-wc-omnibus'));
     }
 }

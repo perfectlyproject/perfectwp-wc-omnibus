@@ -3,8 +3,9 @@
 namespace PerfectWPWCO\ViewModel;
 
 use PerfectWPWCO\Models\HistoryPrice;
+use PerfectWPWCO\Models\Options;
 
-class HistoryPriceViewModel
+class FrontHistoryPriceViewModel
 {
     private $product;
 
@@ -34,5 +35,21 @@ class HistoryPriceViewModel
         ];
 
         return 'incl' === $taxDisplayMode ? wc_get_price_including_tax($this->product, $args) : wc_get_price_excluding_tax($this->product, $args);
+    }
+
+    public function getMessage(): string
+    {
+        $message = Options::getMessageLowestPrice();
+
+        $attributes = [
+            '[days]' => Options::getLowestPriceNumberOfDays(),
+            '[price]' => wc_price($this->getPrice())
+        ];
+
+        foreach ($attributes as $attribute => $value) {
+            $message = str_replace($attribute, $value, $message);
+        }
+
+        return $message;
     }
 }
