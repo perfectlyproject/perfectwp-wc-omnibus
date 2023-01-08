@@ -29,7 +29,7 @@ class ProductListener
 
     public function onSaveProduct(\WC_Product $product)
     {
-        if (empty($product->get_price())) {
+        if (empty($product->get_price()) || $product->get_status() === 'draft') {
             return;
         }
 
