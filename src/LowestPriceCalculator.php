@@ -8,8 +8,12 @@ use PerfectWPWCO\Repositories\HistoryPriceRepository;
 
 class LowestPriceCalculator
 {
-    public function getLowestPrice(\WC_Product $product)
+    public function getLowestPrice($product)
     {
+        if (!$product instanceof \WC_Product) {
+            return null;
+        }
+
         $historyPriceRepository = new HistoryPriceRepository();
         $historyPrice = $historyPriceRepository->findLowestHistoryPriceInDaysFromOptions($product->get_id());
 
