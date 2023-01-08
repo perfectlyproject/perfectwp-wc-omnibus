@@ -48,7 +48,7 @@ class HistoryPriceRepository
             $lastChanged = $this->findLastHistoryPrice($productId);
 
             if ($lastChanged) {
-                $dateFrom = $lastChanged->getStartDate();
+                $dateFrom = $lastChanged->getStartDate()->modify('-' . $fromDays . 'days');
             } else {
                 return null;
             }
