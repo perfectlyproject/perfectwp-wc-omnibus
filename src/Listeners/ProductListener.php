@@ -19,12 +19,12 @@ class ProductListener
 
     public function register()
     {
-        add_action( 'woocommerce_after_product_object_save', [$this, 'onSaveProduct'], 10, 1 );
+        add_action('woocommerce_after_product_object_save', [$this, 'onSaveProduct'], 10, 1);
     }
 
     public function unregister()
     {
-        remove_action( 'woocommerce_after_product_object_save', [$this, 'onSaveProduct'], 10, 1 );
+        remove_action('woocommerce_after_product_object_save', [$this, 'onSaveProduct'], 10);
     }
 
     public function onSaveProduct(\WC_Product $product)
