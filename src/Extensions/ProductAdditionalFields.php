@@ -6,6 +6,7 @@ if (!defined('ABSPATH')) exit;
 
 use PerfectWPWCO\LowestPriceCalculator;
 use PerfectWPWCO\Plugin;
+use PerfectWPWCO\Repositories\HistoryPriceRepository;
 use PerfectWPWCO\Utils\Template;
 
 class ProductAdditionalFields
@@ -27,11 +28,16 @@ class ProductAdditionalFields
     {
         $productId = intval($_GET['post']);
 
+        $historyRepository = new HistoryPriceRepository();
+        $historyPrices = $historyRepository->findAllByProductId($productId);
+
         (new Template())
             ->setPath(Plugin::getInstance()->basePath('templates/admin/omnibus-price-simple.php'))
             ->setParams([
-                'historyPrice' => $this->lowestPriceCalculator->getLowestPrice(wc_get_product($productId)),
-                'hasHistoryPrice' => $this->lowestPriceCalculator->hasHistoryPrice($productId)
+                'productId' => $productId,
+                'lowestHistoryPrice' => $this->lowestPriceCalculator->getLowestPrice(wc_get_product($productId)),
+                'hasHistoryPrice' => $this->lowestPriceCalculator->hasHistoryPrice($productId),
+                'historyPrices' => $historyPrices,
         ])->display();
     }
 
@@ -39,11 +45,16 @@ class ProductAdditionalFields
     {
         $productId = $variation->ID;
 
+        $historyRepository = new HistoryPriceRepository();
+        $historyPrices = $historyRepository->findAllByProductId($productId);
+
         (new Template())
             ->setPath(Plugin::getInstance()->basePath('templates/admin/omnibus-price-simple.php'))
             ->setParams([
-                'historyPrice' => $this->lowestPriceCalculator->getLowestPrice(wc_get_product($productId)),
-                'hasHistoryPrice' => $this->lowestPriceCalculator->hasHistoryPrice($productId)
+                'productId' => $productId,
+                'lowestHistoryPrice' => $this->lowestPriceCalculator->getLowestPrice(wc_get_product($productId)),
+                'hasHistoryPrice' => $this->lowestPriceCalculator->hasHistoryPrice($productId),
+                'historyPrices' => $historyPrices,
             ])->display();
     }
 }

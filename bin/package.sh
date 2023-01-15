@@ -10,6 +10,10 @@ echo "Generating build directory..."
 rm -rf "$BUILD_PATH"
 mkdir -p "$DEST_PATH"
 
+echo "Install dependencies and generate production assets"
+npm install
+npm run prod
+
 echo "Cleaning up PHP dependencies..."
 composer install --no-dev || exit "$?"
 

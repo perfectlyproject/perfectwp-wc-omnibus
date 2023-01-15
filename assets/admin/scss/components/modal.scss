@@ -1,0 +1,83 @@
+.pwo-modal {
+  visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  overflow-x: hidden;
+  z-index: 10100;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  padding: 30px 16px;
+  transform: scale(0.7);
+  transition: visibility  0s .6s, opacity .3s ease, transform .2s ease .1s;
+
+  &__inner {
+    margin: auto;
+    background: white;
+    max-width: 900px;
+    width: 100%;
+    padding: 36px;
+    position: relative;
+  }
+
+  &--active {
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
+    transition: visibility 0s .2s, opacity .2s ease .2s, transform .2s ease .2s;
+  }
+
+  &__overlay {
+    position: fixed;
+    visibility: hidden;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    transition: visibility 0s .6s, opacity .5s ease .3s;
+    z-index: 10000;
+
+    &--active {
+      opacity: 1;
+      visibility: visible;
+      transition: visibility 0s, opacity .5s ease;
+    }
+  }
+
+  &__title {
+    font-size: 14px;
+    font-weight: 700;
+    text-align: left;
+    padding: 20px 36px;
+    margin: -36px -36px 20px -36px;
+    border-bottom: 1px solid #C3C4C7;
+  }
+
+  &__btn-close {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 15px;
+    right: 32px;
+    width: 32px;
+    height: 32px;
+    color: black;
+    cursor: pointer;
+    border: 0;
+    background: transparent;
+  }
+}
+
+body, html {
+  &.pwo-modal--opened {
+    overflow: hidden;
+  }
+}

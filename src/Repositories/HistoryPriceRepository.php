@@ -75,4 +75,19 @@ class HistoryPriceRepository
 
         return $result ? HistoryPrice::buildModel($result) : null;
     }
+
+    /**
+     * @param int $productId
+     * @return array
+     */
+    public function findAllByProductId(int $productId, $orderBy = 'start_date', $order = 'DESC'): array
+    {
+        global $wpdb;
+
+        $results = $wpdb->get_results($wpdb->prepare('SELECT * FROM ' . HistoryPrice::getPrefixedTable() . ' WHERE `product_id` = %d ORDER BY %s %s', $productId, $orderBy, $order), ARRAY_A);
+
+        return array_map(function($result) {
+                return HistoryPrice::buildModel($result);
+            }, $results);
+    }
 }

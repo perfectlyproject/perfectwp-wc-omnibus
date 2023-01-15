@@ -14,9 +14,9 @@ Plugin for [WooCommerce](https://wordpress.org/plugins/woocommerce/) with correc
 
 - Showing the lowest price in the last 30 days before a product has been marked as on sale
 - Works correctly with taxable products
-- Works correctly with duplicating product function
-- Translation for message, supports WPML and Polylang plugin
+- Translation for the message, supports WPML and Polylang plugin
 - Tracking all price changes
+- Preview History prices
 
 Shortcode:
 - For developers who need to display information on custom place use ``[pwp_wco_omnibus_information]`` shortcode (Not working with variant products).
@@ -30,9 +30,10 @@ Works correctly with common product types:
 == Screenshots ==
 1. Additional fields for simple products
 2. The information is showing on a simple product page
-3. Additional fields for variations
-4. The information is showing on a variable product page
-5. Plugin settings
+3. Preview history prices
+4. Additional fields for variations
+5. The information is showing on a variable product page
+6. Plugin settings
 
 == Changelog ==
 
