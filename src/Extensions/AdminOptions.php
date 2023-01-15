@@ -3,8 +3,10 @@
 namespace PerfectWPWCO\Extensions;
 
 use PerfectWPWCO\Models\Options;
+use PerfectWPWCO\Plugin;
 use PerfectWPWCO\Repositories\HistoryPriceRepository;
 use PerfectWPWCO\Support\Language;
+use PerfectWPWCO\Utils\Arr;
 
 class AdminOptions
 {
@@ -14,6 +16,7 @@ class AdminOptions
     {
         add_filter('woocommerce_get_sections_products', [$this, 'filterWoocommerceGetSectionsProducts'], 200, 1);
         add_filter('woocommerce_get_settings_products', [$this, 'filterWoocommerceGetSettingsProducts'], 10, 2);
+        add_action('plugin_action_links_' . plugin_basename(Plugin::getInstance()->getPluginPath()), [$this, 'filterPluginActionLinks'], 10, 1);
     }
 
     public function filterWoocommerceGetSectionsProducts($sections)
@@ -62,7 +65,7 @@ class AdminOptions
                 'id' => Options::getOptionKey('is_show_on_front_page'),
                 'type' => 'checkbox',
                 'default' => 'no',
-                'checkboxgroup' => 'end',
+                'checkboxgroup' => '',
             ],
             [
                 'desc' => __('Page', 'perfectwp-wc-omnibus'),
@@ -113,5 +116,17 @@ class AdminOptions
                 'type' => 'sectionend'
             ],
         ];
+    }
+
+    public function filterPluginActionLinks($actions)
+    {
+        $actions['settings'] = sprintf(
+            '<a href="%1$s" %2$s>%3$s</a>',
+            admin_url('admin.php?page=wc-settings&tab=products&section=pwp_wco_omnibus'),
+            'aria-label="' . __( 'Settings for Duplicate Post', 'perfectwp-wc-omnibus' ) . '"',
+            esc_html__( 'Settings', 'perfectwp-wc-omnibus' )
+        );
+
+        return $actions;
     }
 }
