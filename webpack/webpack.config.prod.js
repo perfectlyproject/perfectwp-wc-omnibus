@@ -14,9 +14,9 @@ module.exports = env => {
     },
     devtool: false,
     plugins: [
-      new CleanWebpackPlugin({
-        cleanOnceBeforeBuildPatterns: ['**/*', '!fonts/*', '!img/*']
-      }),
+      // new CleanWebpackPlugin({
+      //   cleanOnceBeforeBuildPatterns: ['**/*', '!fonts/*', '!img/*']
+      // }),
       new Webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify('production')
       }),
@@ -24,7 +24,6 @@ module.exports = env => {
     optimization: {
       minimizer: [new TerserPlugin({
         parallel: true,
-        cache: true,
         extractComments: true,
         terserOptions: {
           ecma: 5,
