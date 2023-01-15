@@ -37,6 +37,12 @@ Works correctly with common product types:
 
 == Changelog ==
 
+= 1.1.0 2023-01-16 =
+
+* Preview price history
+* Add settings link in plugins.php page
+* Add option show on page (useful for Page builders)
+
 = 1.0.4 2023-01-09 =
 
 * Correct implemented EU Directive Omnibus, thanks to [piotrczapla2jb](https://wordpress.org/support/users/piotrczapla2jb/)
