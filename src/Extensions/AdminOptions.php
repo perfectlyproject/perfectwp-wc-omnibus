@@ -65,6 +65,13 @@ class AdminOptions
                 'checkboxgroup' => 'end',
             ],
             [
+                'desc' => __('Page', 'perfectwp-wc-omnibus'),
+                'id' => Options::getOptionKey('is_show_on_page'),
+                'type' => 'checkbox',
+                'default' => 'no',
+                'checkboxgroup' => 'end',
+            ],
+            [
                 'title' => __('Number of days:', 'perfectwp-wc-omnibus'),
                 'id' => Options::getOptionKey('lowest_price_number_of_days'),
                 'type' => 'number',

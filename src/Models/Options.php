@@ -89,6 +89,14 @@ class Options
     }
 
     /**
+     * @return bool
+     */
+    public static function isShowOnPage(): bool
+    {
+        return self::getOption('is_show_on_page', 'no') === 'yes';
+    }
+
+    /**
      * @return int
      */
     public static function getLowestPriceNumberOfDays(): int

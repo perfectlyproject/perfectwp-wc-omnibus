@@ -42,6 +42,10 @@ class ProductPageAdditionalInfo
             return $this->renderPrice($price, $this->getOmnibusInformation($product));
         }
 
+        if (is_page() && Options::isShowOnPage()) {
+            return $this->renderPrice($price, $this->getOmnibusInformation($product));
+        }
+
         return $price;
     }
 
