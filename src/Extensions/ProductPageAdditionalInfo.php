@@ -15,7 +15,7 @@ class ProductPageAdditionalInfo
 {
     public function boot()
     {
-        add_action('woocommerce_get_price_html', [$this, 'filterGetPriceHtml'], 10, 2);
+        add_action('woocommerce_get_price_html', [$this, 'filterGetPriceHtml'], 100, 2);
     }
 
     public function filterGetPriceHtml($price, $product)

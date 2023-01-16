@@ -7,9 +7,11 @@ if (!defined('ABSPATH')) exit;
 use PerfectWPWCO\Extensions\AdminOptions;
 use PerfectWPWCO\Extensions\ProductAdditionalFields;
 use PerfectWPWCO\Extensions\ProductPageAdditionalInfo;
+use PerfectWPWCO\Extensions\ReindexHistoryPriceCron;
 use PerfectWPWCO\Extensions\Shortcode;
 use PerfectWPWCO\Plugin;
 use PerfectWPWCO\Support\DuplicatePostSupport;
+use PerfectWPWCO\Support\WooDiscountRulesPluginSupport;
 
 class ExtensionsProvider
 {
@@ -25,7 +27,9 @@ class ExtensionsProvider
             ProductPageAdditionalInfo::class,
             AdminOptions::class,
             Shortcode::class,
-            DuplicatePostSupport::class
+            DuplicatePostSupport::class,
+            WooDiscountRulesPluginSupport::class,
+            ReindexHistoryPriceCron::class,
                  ] as $class) {
             Plugin::getInstance()->get($class)->boot();
         }

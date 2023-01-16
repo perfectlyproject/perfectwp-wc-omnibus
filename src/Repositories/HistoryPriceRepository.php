@@ -6,6 +6,7 @@ if (!defined('ABSPATH')) exit;
 
 use PerfectWPWCO\Models\HistoryPrice;
 use PerfectWPWCO\Models\Options;
+use PerfectWPWCO\Plugin;
 
 class HistoryPriceRepository
 {
@@ -89,5 +90,55 @@ class HistoryPriceRepository
         return array_map(function($result) {
                 return HistoryPrice::buildModel($result);
             }, $results);
+    }
+
+    /**
+     * @param HistoryPrice $historyPrice
+     * @return void
+     */
+    public function save(HistoryPrice $historyPrice)
+    {
+        $historyPrice = apply_filters(Plugin::SLUG . '_before_history_price_saved', $historyPrice);
+
+        $historyPrice->save();
+    }
+
+    /**
+     * Push new price to history table
+     *
+     * @param int $productId
+     * @param $productPrice
+     * @return void
+     */
+    public function pushPrice(int $productId, $productPrice)
+    {
+        $newPrice = floatval($productPrice);
+
+        if (empty($newPrice)) {
+            return;
+        }
+
+        $lastHistoryPrice = $this->findLastHistoryPrice($productId);
+        $lastPrice = $lastHistoryPrice !== null ? $lastHistoryPrice->getPrice() : null;
+
+        $newPrice = apply_filters(Plugin::SLUG . '_before_next_history_price_pushed', $newPrice, $lastPrice, $productId);
+
+        // Floating point precision
+        if (empty($newPrice) || number_format($newPrice, 4) === number_format($lastPrice, 4)) {
+            return;
+        }
+
+        $nextHistoryPrice = new HistoryPrice();
+        $nextHistoryPrice->setProductId($productId);
+        $nextHistoryPrice->setPrice($newPrice);
+        $nextHistoryPrice->setStartDate(new \DateTimeImmutable('now'));
+
+        $this->save($nextHistoryPrice);
+
+        if ($lastHistoryPrice !== null) {
+            $lastHistoryPrice->setEndDate(new \DateTimeImmutable('now'));
+
+            $this->save($lastHistoryPrice);
+        }
     }
 }
