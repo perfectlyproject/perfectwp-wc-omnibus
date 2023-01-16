@@ -9,6 +9,9 @@ DEST_PATH="$BUILD_PATH/$PLUGIN_SLUG"
 echo "Generating build directory..."
 rm -rf "$BUILD_PATH"
 mkdir -p "$DEST_PATH"
+rm -rf "${PROJECT_PATH}/node_modules"
+rm -rf "${PROJECT_PATH}/public"
+rm -rf "${PROJECT_PATH}/vendor"
 
 echo "Install dependencies and generate production assets"
 npm install
