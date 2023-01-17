@@ -14,7 +14,7 @@ class ReindexHistoryPriceCron
 
     public static function getActionName(): string
     {
-        return Plugin::SLUG . '_reindex_history_prices';
+        return Plugin::SLUG . '_bulk_reindex_history_prices';
     }
 
     public function executeCronJob()
