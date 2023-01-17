@@ -17,9 +17,21 @@ class WooDiscountRulesPluginSupport
             }
 
             add_filter(Plugin::SLUG . '_before_next_history_price_pushed', [$this, 'filterBeforeHistoryPricePushed'], 10, 3);
+            add_filter(Plugin::SLUG . '_product_is_on_sale', [$this, 'filterProductIsOnSale'], 10, 2);
 
             add_action('advanced_woo_discount_rules_after_save_rule', [$this, 'hookAdvancedWooDiscountRulesAfterSaveRule']);
         });
+    }
+
+    public function filterProductIsOnSale($isOnSale, $productId)
+    {
+        $discount = ManageDiscount::calculateInitialAndDiscountedPrice($productId, 1);
+
+        if ($isOnSale === true) {
+            return true;
+        }
+
+        return $discount !== false;
     }
 
     public function hookAdvancedWooDiscountRulesAfterSaveRule()

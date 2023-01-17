@@ -15,12 +15,13 @@ class ProductPageAdditionalInfo
 {
     public function boot()
     {
-        add_action('woocommerce_get_price_html', [$this, 'filterGetPriceHtml'], 100, 2);
+        add_action('woocommerce_get_price_html', [$this, 'filterGetPriceHtml'], 200, 2);
     }
 
     public function filterGetPriceHtml($price, $product)
     {
-        if (is_admin() || $product instanceof \WC_Product_Variable || (!$product->is_on_sale() && Options::isShowOnlyForSale())) {
+        if (is_admin() || $product instanceof \WC_Product_Variable ||
+            (!apply_filters(Plugin::SLUG . '_product_is_on_sale', $product->is_on_sale(), $product->get_id()) && Options::isShowOnlyForSale())) {
             return $price;
         }
 
