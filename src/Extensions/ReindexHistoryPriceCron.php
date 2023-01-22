@@ -9,7 +9,7 @@ class ReindexHistoryPriceCron
 {
     public function boot()
     {
-        add_action(self::getActionName(), [$this, 'executeCronJob']);
+        add_action(self::getActionName(), [$this, 'executeCronJob'], 10, 1);
     }
 
     public static function getActionName(): string
@@ -17,9 +17,14 @@ class ReindexHistoryPriceCron
         return Plugin::SLUG . '_bulk_reindex_history_prices';
     }
 
-    public function executeCronJob()
+    public static function dispatch(int $cursorId = 0, int $delay = 2)
+    {
+        wp_schedule_single_event(time() + $delay, ReindexHistoryPriceCron::getActionName(), [$cursorId]);
+    }
+
+    public function executeCronJob($cursorId)
     {
         $bulkReindex = new BulkReindex();
-        $bulkReindex->reindex();
+        $bulkReindex->reindex($cursorId);
     }
 }

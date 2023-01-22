@@ -58,24 +58,17 @@ class WooDiscountRulesPluginSupport
     public function hookWpAjaxWdrAjax()
     {
         if ($_REQUEST['method'] === 'manage_status') {
-            $this->scheduleReindexEvent();
+            ReindexHistoryPriceCron::dispatch(0, 10);
         }
     }
 
     public function hookAdvancedWooDiscountRulesAfterSaveRule()
     {
-        $this->scheduleReindexEvent();
+        ReindexHistoryPriceCron::dispatch(0, 1);
     }
 
     public function hookAdvancedWooDiscountRulesAfterDeleteRule()
     {
-        $this->scheduleReindexEvent();
-    }
-
-    public function scheduleReindexEvent()
-    {
-        if (!wp_next_scheduled(ReindexHistoryPriceCron::getActionName())) {
-            wp_schedule_single_event(time() + 10, ReindexHistoryPriceCron::getActionName());
-        }
+        ReindexHistoryPriceCron::dispatch(0, 1);
     }
 }
