@@ -8,6 +8,7 @@ use PerfectWPWCO\LowestPriceCalculator;
 use PerfectWPWCO\Models\Options;
 use PerfectWPWCO\Plugin;
 use PerfectWPWCO\Repositories\HistoryPriceRepository;
+use PerfectWPWCO\Utils\Arr;
 use PerfectWPWCO\Utils\Template;
 use PerfectWPWCO\ViewModel\FrontHistoryPriceViewModel;
 
@@ -68,6 +69,29 @@ class ProductPageAdditionalInfo
             ->setPath(Plugin::getInstance()->basePath('templates/front/omnibus-price.php'))
             ->setParams([
                 'historyPrice' => new FrontHistoryPriceViewModel($product, $historyPrice)
+            ])->render();
+    }
+
+    public static function getVariationsOmnibusInformation($product)
+    {
+        if (!$product instanceof \WC_Product_Variable) {
+            return '';
+        }
+
+        $historyPrices = [];
+
+        foreach ($product->get_available_variations() as $variation) {
+            if ($variationId = Arr::get($variation, 'variation_id')) {
+                $lowestPriceCalculator = new LowestPriceCalculator();
+                $historyPrices[] = new FrontHistoryPriceViewModel($product, $lowestPriceCalculator->getLowestPrice(wc_get_product($variationId)));
+            }
+        }
+
+        return (new Template())
+            ->setPath(Plugin::getInstance()->basePath('templates/front/omnibus-price-variations.php'))
+            ->setParams([
+                'productId' => $product->get_id(),
+                'historyPrices' => $historyPrices
             ])->render();
     }
 }

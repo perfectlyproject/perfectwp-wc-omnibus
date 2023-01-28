@@ -21,6 +21,9 @@ module.exports = env => {
         './assets/admin/js/app.ts',
         './assets/admin/scss/app.scss',
       ],
+      front: [
+        './assets/front/js/app.ts'
+      ],
     },
     output: {
       path: config.paths.dist,
@@ -39,11 +42,10 @@ module.exports = env => {
       new StylelintPlugin(),
       new WpAssets(),
       new ESLintPlugin(),
-      new webpack.ProvidePlugin({
-        $: 'jquery',
-        jQuery: 'jquery'
-      })
     ],
+    externals: {
+      "jquery": "jQuery"
+    },
     resolve: {
       extensions: ['.js', '.ts', '.tsx'],
     },

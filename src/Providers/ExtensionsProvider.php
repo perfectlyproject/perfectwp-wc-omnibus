@@ -8,7 +8,6 @@ use PerfectWPWCO\Extensions\AdminOptions;
 use PerfectWPWCO\Extensions\ProductAdditionalFields;
 use PerfectWPWCO\Extensions\ProductPageAdditionalInfo;
 use PerfectWPWCO\Extensions\ReindexHistoryPriceCron;
-use PerfectWPWCO\Extensions\Shortcode;
 use PerfectWPWCO\Plugin;
 use PerfectWPWCO\Support\DuplicatePostSupport;
 use PerfectWPWCO\Support\WooDiscountRulesPluginSupport;
@@ -26,7 +25,6 @@ class ExtensionsProvider
             ProductAdditionalFields::class,
             ProductPageAdditionalInfo::class,
             AdminOptions::class,
-            Shortcode::class,
             DuplicatePostSupport::class,
             WooDiscountRulesPluginSupport::class,
             ReindexHistoryPriceCron::class,

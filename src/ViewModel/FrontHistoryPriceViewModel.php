@@ -7,6 +7,7 @@ use PerfectWPWCO\Models\Options;
 
 class FrontHistoryPriceViewModel
 {
+    /** @var \WC_Product */
     private $product;
 
     /** @var HistoryPrice */
@@ -16,6 +17,16 @@ class FrontHistoryPriceViewModel
     {
         $this->product = $product;
         $this->historyPrice = $historyPrice;
+    }
+
+    /**
+     * Return product id
+     *
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->historyPrice->getProductId();
     }
 
     /**

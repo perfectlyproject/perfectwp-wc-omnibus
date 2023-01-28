@@ -7,6 +7,7 @@ if (!defined('ABSPATH')) exit;
 use PerfectWPWCO\Providers\AssetsProvider;
 use PerfectWPWCO\Providers\ExtensionsProvider;
 use PerfectWPWCO\Providers\ListenerProvider;
+use PerfectWPWCO\Providers\ShortcodeProvider;
 use PerfectWPWCO\Providers\SystemProvider;
 
 final class Plugin extends Container
@@ -98,6 +99,7 @@ final class Plugin extends Container
         $this->register(SystemProvider::class);
         $this->register(ListenerProvider::class);
         $this->register(ExtensionsProvider::class);
+        $this->register(ShortcodeProvider::class);
     }
 
     /**

@@ -1,5 +1,4 @@
 import * as delegate from 'delegate';
-
 export default class Modal {
     public static current: Modal = null;
     public overlay: HTMLElement;
